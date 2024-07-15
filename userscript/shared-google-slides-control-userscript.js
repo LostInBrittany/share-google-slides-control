@@ -74,16 +74,16 @@ const {html, render} = await import('https://esm.run/lit-html@1');
             // alert(`Remote control URL: https://shared-google-slides-control.cleverapps.io/command/${slidedeck}`);
             const dialog = html`<dialog id="shareDialog">
               <form method="dialog">
-                <p>Remote control URL:</p>
+                <h1>Remote control URL</h1>
                 <p>
                   <a href="https://shared-google-slides-control.cleverapps.io/ui/#${slidedeck}">
                     https://shared-google-slides-control.cleverapps.io/ui/#${slidedeck}
                   </a>
                 </p>
-                <div><img src="${generatedQRCode}"></div>
-                <div>
-                  <button autofocus id="copyDialog">Copy</button>
-                  <button id="closeDialog">Close</button>
+                <div style="display:flex;flex-flow:row;justify-content:center;"><img src="${generatedQRCode}"></div>
+                <div style="display:flex;flex-flow:row;justify-content:center;gap:2rem;">
+                  <button autofocus id="copyDialog" style="padding:0.5rem;min-width:10rem">Copy</button>
+                  <button id="closeDialog" style="padding:0.5rem;min-width:10rem">Close</button>
                 </div>
               </form>
             </dialog>`;

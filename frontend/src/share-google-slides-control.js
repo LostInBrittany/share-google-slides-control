@@ -17,7 +17,7 @@ const rightArrow = { content: `<svg fill="#000000" height="100px" width="100px" 
 	c2.814,2.813,4.394,6.628,4.394,10.606C230,168.976,228.42,172.792,225.606,175.605z"/>
 </svg>` };
 
-class ShareSlideControl extends LitElement {
+class ShareGoogleSlidesControl extends LitElement {
   static properties = {
     slidedeck: { type: String },
   }
@@ -127,4 +127,4 @@ class ShareSlideControl extends LitElement {
   }
 }
 
-customElements.define('share-slide-control', ShareSlideControl);
+customElements.define('share-google-slides-control', ShareGoogleSlidesControl);
