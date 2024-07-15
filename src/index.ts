@@ -10,6 +10,7 @@ import http from 'node:http';
 import { AddressInfo } from 'node:net';
 import {v4 as uuidv4} from 'uuid';
 import WebSocket, { WebSocketServer } from 'ws';
+import QRCode from 'qrcode';
 
 const __filename = new URL('', import.meta.url).pathname;
 const __dirname = new URL('.', import.meta.url).pathname;
@@ -75,14 +76,22 @@ app.get('/health', (req, resp) => {
   resp.send('OK');
 });
 
-app.get('/fuck', (req, resp) => {
-  resp.send('you');
+app.post('/qrcode', async (req, resp) => {
+  let url = req.body.url;
+  console.log(url);
+  let generatedQRCode;
+  try {
+    generatedQRCode = await QRCode.toDataURL(url);
+    resp.send(generatedQRCode);
+  } catch (err) {
+    console.error(err);
+    resp.send(err);
+  }
 });
 
 app.post('/command/:clientId', async (req, resp) => {
   let clientId = req.params.clientId;
   let command = req.body.command;
-  console.log(req.body);
 
   if (clients[clientId]) {
     const ws = clients[clientId].send(command); 
