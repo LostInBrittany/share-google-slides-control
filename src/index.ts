@@ -82,6 +82,7 @@ app.get('/fuck', (req, resp) => {
 app.post('/command/:clientId', async (req, resp) => {
   let clientId = req.params.clientId;
   let command = req.body.command;
+  console.log(req.body);
 
   if (clients[clientId]) {
     const ws = clients[clientId].send(command); 

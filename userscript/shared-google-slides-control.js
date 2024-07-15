@@ -37,7 +37,7 @@
 
 
   // URL of the WebSocket server
-  const wsUrl = `ws://shared-google-slides-control.cleverapps.io/websocket/${slidedeck}`;
+  const wsUrl = `wss://shared-google-slides-control.cleverapps.io/websocket/${slidedeck}`;
 
   // Create a new WebSocket connection
   const socket = new WebSocket(wsUrl);

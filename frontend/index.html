@@ -5,7 +5,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="Description" content="Put your description here.">
-  <base href="/">
+  <base href="/ui/">
+  <link rel="stylesheet" href="https://components.clever-cloud.com/styles.css">
 
   <style>
     html,
@@ -23,6 +24,11 @@
   <share-slide-control></share-slide-control>
 
   <script type="module" src="./src/share-slide-control.js"></script>
+
+  <script>
+    let slidedeck = window.location.hash.substring(1);
+    document.querySelector('share-slide-control').setAttribute('slidedeck', slidedeck);
+  </script>
 </body>
 
 </html>
