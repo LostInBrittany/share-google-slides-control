@@ -21,13 +21,13 @@
 </head>
 
 <body>
-  <share-slide-control></share-slide-control>
+  <share-google-slides-control></share-google-slides-control>
 
   <script type="module" src="./src/share-google-slides-control.js"></script>
 
   <script>
     let slidedeck = window.location.hash.substring(1);
-    document.querySelector('share-slide-control').setAttribute('slidedeck', slidedeck);
+    document.querySelector('share-google-slides-control').setAttribute('slidedeck', slidedeck);
   </script>
 </body>
 
