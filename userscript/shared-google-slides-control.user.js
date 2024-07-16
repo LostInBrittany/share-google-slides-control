@@ -9,13 +9,12 @@
 // @grant        none
 // ==/UserScript==
 
-
-const {html, render} = await import('https://esm.run/lit-html@1');
-
-
+/*jshint esversion: 11 */
 
 (async function() {
     'use strict';
+    
+    const {html, render} = await import('https://cdn.jsdelivr.net/npm/lit-html@3.1.4/+esm');
 
     // Get the pathname of the current page
     const pathname = window.location.pathname;
@@ -25,6 +24,7 @@ const {html, render} = await import('https://esm.run/lit-html@1');
     console.log(`Presentation Id: ${slidedeck}`);
 
     let generatedQRCode = await getQRCode();
+    showDialog();
 
     async function getQRCode() {
         let resp = await fetch("https://shared-google-slides-control.cleverapps.io/qrcode", {
@@ -36,6 +36,39 @@ const {html, render} = await import('https://esm.run/lit-html@1');
         });
         let generatedQRCode = await resp.text();
         return generatedQRCode;
+    }
+
+    function showDialog() {
+        const dialog = html`<dialog id="shareDialog">
+              <form method="dialog">
+                <h1>Remote control URL</h1>
+                <p>
+                  <a href="https://shared-google-slides-control.cleverapps.io/ui/#${slidedeck}">
+                    https://shared-google-slides-control.cleverapps.io/ui/#${slidedeck}
+                  </a>
+                </p>
+                <div style="display:flex;flex-flow:row;justify-content:center;"><img src="${generatedQRCode}"></div>
+                <div style="display:flex;flex-flow:row;justify-content:center;gap:2rem;">
+                  <button autofocus id="copyDialog" style="padding:0.5rem;min-width:10rem">Copy</button>
+                  <button id="closeDialog" style="padding:0.5rem;min-width:10rem">Close</button>
+                </div>
+              </form>
+            </dialog>`;
+
+        let dialogParent = document.createElement('div');
+        document.body.appendChild(dialogParent);
+        render(dialog, dialogParent);
+        document.getElementById('shareDialog').showModal();
+
+        const closeButton = document.getElementById("closeDialog");
+        closeButton.addEventListener("click", () => {
+            document.getElementById('shareDialog').close();
+        });
+        const copyButton = document.getElementById("copyDialog");
+        copyButton.addEventListener("click", () => {
+            console.log(`Link:  https://shared-google-slides-control.cleverapps.io/ui/#${slidedeck}`);
+            navigator.clipboard.writeText(`https://shared-google-slides-control.cleverapps.io/ui/#${slidedeck}`);
+        });
     }
 
     // Function to send a keyboard event
@@ -71,37 +104,6 @@ const {html, render} = await import('https://esm.run/lit-html@1');
             reconnectInterval = 1000; // Reset reconnect interval on successful connection
 
 
-            // alert(`Remote control URL: https://shared-google-slides-control.cleverapps.io/command/${slidedeck}`);
-            const dialog = html`<dialog id="shareDialog">
-              <form method="dialog">
-                <h1>Remote control URL</h1>
-                <p>
-                  <a href="https://shared-google-slides-control.cleverapps.io/ui/#${slidedeck}">
-                    https://shared-google-slides-control.cleverapps.io/ui/#${slidedeck}
-                  </a>
-                </p>
-                <div style="display:flex;flex-flow:row;justify-content:center;"><img src="${generatedQRCode}"></div>
-                <div style="display:flex;flex-flow:row;justify-content:center;gap:2rem;">
-                  <button autofocus id="copyDialog" style="padding:0.5rem;min-width:10rem">Copy</button>
-                  <button id="closeDialog" style="padding:0.5rem;min-width:10rem">Close</button>
-                </div>
-              </form>
-            </dialog>`;
-
-            let dialogParent = document.createElement('div');
-            document.body.appendChild(dialogParent);
-            render(dialog, dialogParent);
-            document.getElementById('shareDialog').showModal();
-
-            const closeButton = document.getElementById("closeDialog");
-            closeButton.addEventListener("click", () => {
-                document.getElementById('shareDialog').close();
-            });
-            const copyButton = document.getElementById("copyDialog");
-            copyButton.addEventListener("click", () => {
-                console.log(`Link:  https://shared-google-slides-control.cleverapps.io/ui/#${slidedeck}`);
-                navigator.clipboard.writeText(`https://shared-google-slides-control.cleverapps.io/ui/#${slidedeck}`);
-            });
         });
 
         // Event listener for receiving messages from the server
