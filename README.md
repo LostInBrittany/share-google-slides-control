@@ -23,8 +23,8 @@ The solution involves a Greasemonkey userscript on the presenter's side that con
 
 ## Installation
 
-1. **Install Greasemonkey**: Ensure you have the Greasemonkey extension installed in your browser.
-2. **Add the Userscript**: Add the provided Greasemonkey userscript to your browser.
+1. **Install Userscripts plugin in your browser**: the most populars are [Tampermonkey](https://tampermonkey.net/) and [Greasemonkey](http://www.greasespot.net/).
+2. **Add the Userscript**: directly from [GitHub](./userscript/shared-google-slides-control.user.js), or from the [GreasyFork page](https://greasyfork.org/en/scripts/500807-share-google-slides-controls).
 3. **Run the Script**: Open your Google Slides presentation, and the script will automatically display a QR code and link for sharing control.
 
 ## Usage
