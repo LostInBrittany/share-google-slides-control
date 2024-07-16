@@ -8,6 +8,8 @@ Shared Google Slides Control addresses a common pain point in remote presentatio
 
 This project empowers presenters by allowing them to share control of a Google Slides deck with other speakers seamlessly.
 
+
+
 ## How It Works
 
 The solution involves a Greasemonkey userscript on the presenter's side that connects to a remote server via WebSocket. This setup facilitates the following features:
@@ -15,10 +17,14 @@ The solution involves a Greasemonkey userscript on the presenter's side that con
 - **QR Code and Link Generation**: The userscript generates a QR code or a link that can be shared with co-presenters.
 - **Remote Control Interface**: Co-presenters can use the provided link to access a user interface that allows them to control the slide deck in real-time.
 
+https://github.com/user-attachments/assets/befd48ca-fcbe-49ce-ac8e-0cbc6caf2dde
+
 ## Features
 
 - **Seamless Integration**: Easily integrate with your existing Google Slides presentations.
 - **Real-Time Collaboration**: Multiple presenters can control slide transitions without interruptions.
+
+
 - **Secure Connections**: Utilizes WebSocket connections to ensure real-time, secure control sharing.
 
 ## Installation
